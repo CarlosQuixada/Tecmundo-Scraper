@@ -9,6 +9,8 @@ import scrapy
 
 
 class TecmundoScraperItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    title = scrapy.Field()
+    date_news = scrapy.Field()
+    text = scrapy.Field()
+    categories = scrapy.Field()
+    link = scrapy.Field()
