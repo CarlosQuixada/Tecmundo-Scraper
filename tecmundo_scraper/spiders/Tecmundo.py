@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from tecmundo_scraper.items import TecmundoScraperItem
 
 
 class TecmundoSpider(scrapy.Spider):
@@ -18,6 +19,8 @@ class TecmundoSpider(scrapy.Spider):
         title = response.css("h1.tec--article__header__title ::text").extract_first()
         date_news = response.css("div.tec--timestamp__item time::attr(datetime)").extract_first()
         text = "".join(response.css("div.tec--article__body ::text").extract())
-        categorias = response.css("div.z--px-16 div#js-categories a ::text").extract()
+        categories = response.css("div.z--px-16 div#js-categories a ::text").extract()
 
-        yield {'title': title, 'date_news': date_news, 'text': text, 'categorias': categorias}
+        tecmundo = TecmundoScraperItem(title=title, date_news=date_news, text=text, categories=categories, link=link)
+
+        yield tecmundo
